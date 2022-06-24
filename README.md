@@ -6,4 +6,4 @@ to build, make sure you have node.js installed as well as pnpm and typescript. r
 
 
 
-You will need some secret files though that I can't tell you about like the bot token and server-specific IDs and whatnot
+You will need some secret files though that I can't tell you about like the bot token. Also, you will have to change the IDs ofc
