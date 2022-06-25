@@ -19,7 +19,7 @@
     "discord-api-types": "^0.35.0",
     "discord.js": "^13.8.1",
     "fs-extra": "^10.1.0",
-    "moment": "^2.29.3"
+    "temporal-polyfill": "^0.0.7"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
