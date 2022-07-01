@@ -96,7 +96,7 @@ async function init(bot:Client) {
   branches.push(await new branch(bot,pubServer,"903467586816196638","903467586845540383","984911073511608410").init())
   return [pubServer,branches]
 }
-
+//This is a comment test to test out my github client settings, nothing else :3
 function fetchBranch(id:string, branches:branch[]):branch|undefined {
   for (const br of branches) {
     if (br.ID == id) return br
