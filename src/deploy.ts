@@ -4,10 +4,10 @@ import * as path from 'node:path'
 import {REST} from '@discordjs/rest'
 import {Routes} from 'discord-api-types/v9'
 import {TOKEN,ID} from './secret/secret.js'
-import {guildIDList} from './config.js'
+//import {guildIDList} from './config.js'
 import chalk from 'chalk'
 import {Collection} from 'discord.js'
-
+/*
 const commands = new Array()
 const commPath = path.join(process.cwd(),'build','commands')
 const dir = fs.readdirSync(commPath).filter(val => val.endsWith(`.js`))
@@ -23,3 +23,4 @@ for (const id of guildIDList) {
   .catch(console.error)
 }
 
+*/

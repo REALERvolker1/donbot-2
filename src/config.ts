@@ -1,7 +1,7 @@
 import { Client, Guild, GuildMember, Role } from "discord.js"
 import chalk from 'chalk'
 
-
+/*
 class branch {
   private bot:Client
   private pubServer:any
@@ -77,25 +77,23 @@ const servers = {
   }
 }
 */
-
+/*
 const guildIDList = ["690391226230374450","745812899796353024","920237201835585536","903467586816196638",]
-async function init(bot:Client) {
-  const pubServer:{id:string,guild:Guild,refresh:Function,fetchMemb:Function} = {
-    id: "690391226230374450",
-    guild: (await bot.guilds.fetch("690391226230374450")),
-    refresh: async():Promise<Guild> => {
-      return (await bot.guilds.fetch("690391226230374450"))
-    },
-    fetchMemb: async(id:string):Promise<GuildMember> => {
-      return (await pubServer.guild.members.fetch(id))
-    },
-  }
-  const branches:branch[] = []
-  branches.push(await new branch(bot,pubServer,"745812899796353024","786029825575485451","984910922101432440").init())
-  branches.push(await new branch(bot,pubServer,"920237201835585536","920239516592259082","984911176196575282").init())
-  branches.push(await new branch(bot,pubServer,"903467586816196638","903467586845540383","984911073511608410").init())
-  return [pubServer,branches]
+const pubServer:{id:string,guild:Guild,refresh:Function,fetchMemb:Function} = {
+  id: "690391226230374450",
+  guild: (await index.bot.guilds.fetch("690391226230374450")),
+  refresh: async():Promise<Guild> => {
+    return (await index.bot.guilds.fetch("690391226230374450"))
+  },
+  fetchMemb: async(id:string):Promise<GuildMember> => {
+    return (await pubServer.guild.members.fetch(id))
+  },
 }
+const branches:branch[] = []
+branches.push(await new branch(bot,pubServer,"745812899796353024","786029825575485451","984910922101432440").init())
+branches.push(await new branch(bot,pubServer,"920237201835585536","920239516592259082","984911176196575282").init())
+branches.push(await new branch(bot,pubServer,"903467586816196638","903467586845540383","984911073511608410").init())
+
 //This is a comment test to test out my github client settings, nothing else :3
 function fetchBranch(id:string, branches:branch[]):branch|undefined {
   for (const br of branches) {
@@ -104,11 +102,12 @@ function fetchBranch(id:string, branches:branch[]):branch|undefined {
   throw new Error(chalk.red(`Branch ID ${chalk.yellow(id)} not found!`))
 }
 
-/*
+
 async function refresh(servID:string) {
   const serv = await bot.guilds.fetch(servID)
   return serv
 }
-*/
 
-export {branch, guildIDList, fetchBranch, init}
+
+export {branch, guildIDList, fetchBranch, branches}
+*/
