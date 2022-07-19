@@ -1,8 +1,4 @@
 import { Message } from 'discord.js'
-import chalk from 'chalk'
-import {bot} from './index.js'
-import * as br from './branches.js'
-import { Temporal } from 'temporal-polyfill'
 
 async function command(msg:Message) {
   const args = msg.content.trim().split(" ").filter(ඞ => {return ඞ != ""})
@@ -11,14 +7,21 @@ async function command(msg:Message) {
     case "mcage":
       const data = await fetch(`https://api.ashcon.app/mojang/v2/user/${args[0]}`)
       const res = await data.json()
-      msg.reply(res.created_at? res.created_at : `Error. Mojang's API is fucking stupid.`)
+      msg.reply(res.created_at? res.created_at.replace(/@/g, "ඞ") : `Error. Mojang's API is fucking stupid. Please try again later or run 'help`)
     break
     case "dcage":
-      const account = await (await br.pubServ.updateGuild()).guild?.members.fetch(args[0])
+      const account = await msg.guild?.members.fetch(args[0])
       const date = account?.joinedAt?.toDateString()
-      msg.reply(date? date : `Error. DateString object is weird today`)
+      msg.reply(date? `Creation date of ${account?.displayName}: ${date.replace(/@/g, "ඞ")}` : `Error parsing data. Please try again later or run 'help`)
+    break
+    default:
+      msg.reply(`
+      **Available commands**
+      \`'mcage <minecraftIGN>\` returns the age of a Minecraft account
+      \`'dcage <user ID>\` returns the age of a discord user
+      more coming soon
+      `)
   }
 }
-
 
 export {command}

@@ -3,45 +3,37 @@ import {Temporal} from 'temporal-polyfill'
 import chalk from 'chalk'
 import * as sec from './secret/secret.js'
 import { command } from './utils.js'
-import * as br from './branches.js'
+import {allMutuals, branch, roleThem, roleSync, mutualRole} from './branch.js'
+
 const bot:dc.Client = new dc.Client({intents:sec.INTENTS})
 bot.login(sec.TOKEN)
-const pubServ = await br.pubServ.updateGuild()
+console.log(`bot initialized at ${chalk.yellow(performance.now())}`)
+
 bot.on("error", (e) => {
   console.log(e)
   console.trace(e)
 })
 
 bot.once("ready", async() => {
-  console.log(chalk.green(`Bot ready at ${chalk.yellow(Temporal.Now.plainTimeISO().toString())}`))
+  console.log(chalk.green(`Bot ready in ${chalk.yellow(performance.now())} ms at ${chalk.bold.yellow(Temporal.Now.plainTimeISO().toString())}`))
+  //roleSync(bot)
 })
+
 
 bot.on("guildMemberAdd", async(memb:dc.GuildMember) => {
   console.log(`GuildMember ${chalk.blue(memb.displayName)} added to ${memb.guild.name}`)
-  if (memb.guild.id == br.pubServ.ID) {
-    const muts = await br.mutuals(memb.user.id)
-    if (muts.length < 1) return
-    for (const branch of muts) {
-      memb.roles.add(branch.pubRole)
-    }
-  }
+  mutualRole(memb)
 })
 
 bot.on("guildMemberRemove", async(memb) => {
   console.log(`GuildMember ${chalk.blue(memb.displayName)} removed from ${memb.guild.name}`)
-  if (memb.guild.id == pubServ.ID){
-    const channel = memb.user.dmChannel? memb.user.dmChannel : await memb.user.createDM()
-    channel.send(`
-      Please rejoin the public DonFuer discord server to continue your membership in DonFuer.
-      https://donfuer.com/discord
-      Contact volker1#0001 if you believe this is in error.
-    `)
-  }  
+  mutualRole(memb)
 })
 
 bot.on("guildMemberUpdate", async(oldmemb:dc.GuildMember | dc.PartialGuildMember,newmemb:dc.GuildMember) => {
   console.log(`${oldmemb.displayName} => ${newmemb.displayName}`)
   if (oldmemb.roles.highest == newmemb.roles.highest) return //exits if not a role update
+  mutualRole(newmemb)
 })
 
 bot.on("messageCreate", async(msg) => {
